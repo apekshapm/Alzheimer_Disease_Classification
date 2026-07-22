@@ -5,6 +5,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 
 # Title of the app
 st.title("Alzheimer's Disease Prediction")
@@ -12,14 +13,26 @@ st.title("Alzheimer's Disease Prediction")
 # Load the dataset
 @st.cache_data  # Cache the dataset to avoid reloading it every time
 def load_data():
-    # Replace this path with the correct path to your dataset
-    df = pd.read_csv(r"C:\Data science\Alzheimer's Disease Classification\Alzheimer's Disease Classification\alzheimers_disease_data.csv")
+    # Get the path to the dataset in the same directory as the app
+    dataset_path = os.path.join(os.path.dirname(__file__), "alzheimers_disease_data.csv")
+    
+    # Check if dataset exists
+    if not os.path.exists(dataset_path):
+        st.error(f"Dataset not found at: {dataset_path}")
+        st.info("Please ensure 'alzheimers_disease_data.csv' is in the repository root directory")
+        st.stop()
+    
+    df = pd.read_csv(dataset_path)
     df = df.dropna()  # Handle missing values
     # Convert categorical columns to numeric using one-hot encoding
     df = pd.get_dummies(df, columns=['Gender', 'Ethnicity'], drop_first=True)
     return df
 
-df = load_data()
+try:
+    df = load_data()
+except Exception as e:
+    st.error(f"Error loading dataset: {str(e)}")
+    st.stop()
 
 # Split the data into features and target
 X = df.drop(columns=['Diagnosis'])

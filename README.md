@@ -23,7 +23,22 @@ A machine learning application that predicts Alzheimer's disease risk using pati
 - Python 3.8 or higher
 - pip package manager
 
-### Setup
+### Quick Setup
+
+**Option 1: Using Setup Script (Recommended)**
+
+**For macOS/Linux:**
+```bash
+chmod +x setup.sh
+./setup.sh
+```
+
+**For Windows:**
+```cmd
+setup.bat
+```
+
+**Option 2: Manual Setup**
 
 1. Clone the repository:
 ```bash
@@ -31,23 +46,34 @@ git clone https://github.com/apekshapm/Alzheimer_Disease_Classification.git
 cd Alzheimer_Disease_Classification
 ```
 
-2. Install dependencies:
+2. Create a virtual environment:
+```bash
+python3 -m venv venv
+```
+
+3. Activate the virtual environment:
+
+**macOS/Linux:**
+```bash
+source venv/bin/activate
+```
+
+**Windows:**
+```cmd
+venv\Scripts\activate
+```
+
+4. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Place your dataset:
-   - Add `alzheimers_disease_data.csv` in the repository root directory
+## 📊 Dataset Setup
 
-## 🚀 Running Locally
+1. Ensure you have your `alzheimers_disease_data.csv` file
+2. Place it in the repository root directory (same level as `app.py`)
 
-```bash
-streamlit run app.py
-```
-
-The app will open in your browser at `http://localhost:8501`
-
-## 📂 Dataset Structure
+### Dataset Structure
 
 Expected CSV columns:
 - `Age` - Patient age
@@ -55,6 +81,28 @@ Expected CSV columns:
 - `Ethnicity` - Ethnicity information
 - `Diagnosis` - Target variable (Alzheimer's status)
 - Clinical and cognitive features (MMSE scores, etc.)
+
+## 🚀 Running the Application
+
+### Run Locally
+
+```bash
+streamlit run app.py
+```
+
+The app will open in your browser at `http://localhost:8501`
+
+### Run with Custom Port
+
+```bash
+streamlit run app.py --server.port 8502
+```
+
+### Run in Headless Mode (Server)
+
+```bash
+streamlit run app.py --logger.level=error --server.headless true
+```
 
 ## 🌐 Live Deployment
 
@@ -68,7 +116,8 @@ Expected CSV columns:
    - Repository: `apekshapm/Alzheimer_Disease_Classification`
    - Branch: `main`
    - Main file path: `app.py`
-6. Click Deploy!
+6. Add Secrets (if needed) in the app settings
+7. Click Deploy!
 
 **Your live app will be available at**: 
 ```
@@ -81,6 +130,9 @@ https://share.streamlit.io/apekshapm/Alzheimer_Disease_Classification/main/app.p
 - **Render** - Free tier with automatic deployments
 - **Heroku** - Paid option with reliable uptime
 - **PythonAnywhere** - Python-specific hosting
+- **AWS EC2** - Scalable cloud hosting
+- **Google Cloud Run** - Serverless deployment
+- **DigitalOcean** - Affordable VPS hosting
 
 ## 📊 Model Performance
 
@@ -114,35 +166,48 @@ https://share.streamlit.io/apekshapm/Alzheimer_Disease_Classification/main/app.p
 
 ## 🐛 Troubleshooting
 
-**"Dataset not found" error**:
+### "Dataset not found" error
 - Ensure `alzheimers_disease_data.csv` is in the root directory
-- Or upload it to the batch prediction section
+- Check the file path and filename spelling
+- Verify the CSV file is not corrupted
 
-**Column mismatch errors**:
+### Column mismatch errors
 - Verify your CSV has required columns: Age, Gender, Ethnicity, Diagnosis
+- Ensure column names match exactly (case-sensitive)
+- Check for extra whitespace in column names
 
-**Predictions not loading**:
+### Import errors
+- Reinstall requirements: `pip install -r requirements.txt`
+- Verify virtual environment is activated
+- Check Python version (should be 3.8+)
+
+### Predictions not loading
 - Check that input features match training data format
+- Ensure all required columns are present in input data
+- Verify data types are appropriate
 
-## 📝 Project Structure
+## 📁 Project Structure
 
 ```
 Alzheimer_Disease_Classification/
 ├── app.py                          # Main Streamlit app
 ├── requirements.txt                # Python dependencies
-├── alzheimers_disease_data.csv    # Dataset (add this)
+├── setup.sh                        # Setup script for macOS/Linux
+├── setup.bat                       # Setup script for Windows
+├── alzheimers_disease_data.csv     # Dataset (add this)
 ├── README.md                       # This file
 ├── .gitignore                      # Git ignore file
-└── .streamlit/config.toml         # Streamlit configuration
+└── .streamlit/
+    └── config.toml                 # Streamlit configuration
 ```
 
 ## 🤝 Contributing
 
 Contributions are welcome! Please:
 1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a pull request
 
 ## 📄 License
@@ -155,10 +220,25 @@ This project is open source and available under the MIT License.
 - GitHub: [@apekshapm](https://github.com/apekshapm)
 - Repository: [Alzheimer_Disease_Classification](https://github.com/apekshapm/Alzheimer_Disease_Classification)
 
+## 🔗 Quick Links
+
+- [Streamlit Documentation](https://docs.streamlit.io/)
+- [Scikit-learn Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
+- [Pandas Documentation](https://pandas.pydata.org/docs/)
+
 ## 📧 Support
 
-For issues or questions, please open a GitHub issue in the repository.
+For issues or questions, please:
+1. Check the [Troubleshooting](#troubleshooting) section
+2. Open a GitHub issue in the repository
+3. Include error messages and steps to reproduce
 
 ---
 
 **✨ Ready to Deploy!** Your app is fully configured for Streamlit Cloud deployment. 🚀
+
+**🎯 Next Steps:**
+1. ✅ Add your `alzheimers_disease_data.csv` to the repository
+2. ✅ Push changes to GitHub
+3. ✅ Deploy to Streamlit Cloud
+4. ✅ Share your app with others!
